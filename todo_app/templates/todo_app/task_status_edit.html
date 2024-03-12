@@ -1,0 +1,22 @@
+{% extends 'todo_app/base.html' %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'todo_app:task_status_edit' id=kid stat=stat uid=uid %}" class="form-container" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <br>
+        <h1>Update Status </h1> <br>
+        <label>Edit Task </label> <input type="text" class="form-control" name="t_status" value="{{data.t_status}}">
+        <br><br>
+
+        <button type="submit" class="btn btn-primary">Update Data</button>
+        <a href="{% url 'todo_app:home_status' uid=uid %}">
+            <button type="button" class="btn btn-secondary">Back</button>
+        </a>
+
+    </div>
+    </form>
+</div>
+
+
+{% endblock %}

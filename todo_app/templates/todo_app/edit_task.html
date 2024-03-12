@@ -1,0 +1,32 @@
+{% extends 'todo_app/base.html' %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'todo_app:edit' id=obj uid=uid %}" class="form-container" method="POST">
+        {% csrf_token %}
+        <br> <h1>Update Task </h1> <br>
+        <div class="form-group">
+            <label>Title</label> <input class="form-control" type="text" name="task_title" value="{{data.task_title}}"> <br>
+
+            <label>Task Descripation</label> <input class="form-control" type="text" name="task_desc}" value="{{data.task_desc}}"> <br>
+
+            <label>Task Comment</label> <textarea class="form-control" name="task_comm" value="{{data.task_comm}}" rows="4"> </textarea> <br>
+        </div>
+
+        <div class="form-group">
+            <label>Task Status</label>
+            <select class="form-control " name="task_status" id="data_task_status">
+                {% for i in opt_list %}
+                <option value="{{i.t_status}}">{{i.t_status}}</option>
+                {{% endfor %}
+            </select> <br>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Data</button>
+
+        <a href="{% url 'todo_app:home' uid=uid %}">
+            <button type="button" class="btn btn-secondary">Back</button>
+        </a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'todo_app/base.html' %}
+{% block content %}
+<br>
+<div class="container">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Sr. No.</th>
+            <th>Types of Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in data_s_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.t_status }}</td>
+            <td>
+                <a href="{% url 'todo_app:task_status_edit' id=i.task_id stat=i.t_status  uid=uid %}">
+                    <button type="button" class="btn btn-success">Edit</button>
+                </a>
+                <a href="{% url 'todo_app:task_status_del'  id=i.task_id  stat=i.t_status  uid=uid %}">
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+            <center><a href="{% url 'todo_app:home' uid=uid %}"> <button type="button" class="btn btn-lg btn-primary">Home</button>
+            </a></center>
+</div>
+{% endblock %}

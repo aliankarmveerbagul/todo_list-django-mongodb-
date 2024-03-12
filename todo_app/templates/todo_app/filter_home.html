@@ -1,0 +1,94 @@
+{% extends 'todo_app/base.html' %}
+{% block content %}
+
+<div class="container">
+<br>
+<br><h1>Filtered by {{time}}</h1> <br>
+<div class="container">
+  <div class="row">
+    <div class="col dropdown  ">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Filter by Task Status
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% for m in task_status %}
+                        <li><a class="dropdown-item" href="{% url 'todo_app:filter_task' flt=m uid=uid %}">{{m.t_status}}</a></li>
+                        {% endfor %}
+                    </ul>
+
+    </div>
+    <div class="col dropdown  ">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Filter by timeslot
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'todo_app:filter' flt='LastH' uid=uid %}">Last Hour</a></li>
+                        <li><a class="dropdown-item" href="{% url 'todo_app:filter' flt='Last2H' uid=uid %}">Last Two hours</a></li>
+                        <li><a class="dropdown-item" href="{% url 'todo_app:filter' flt='Last3H' uid=uid %}">Last Three hours </a></li>
+                        <li><a class="dropdown-item" href="{% url 'todo_app:filter' flt='Last12H' uid=uid %}">Last 12 hours </a></li>
+                        <li><a class="dropdown-item" href="{% url 'todo_app:filter' flt='Last24H' uid=uid%}">Last 24 hours </a></li
+                    </ul>
+
+    </div>
+ </div>
+</div>
+<br>
+{% for j in task_status %}
+<table class="table    table-striped table-hover ">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col" colspan="5">
+
+            <h1 class="text">
+                {{j.t_status}}
+            </h1>
+
+        </th>
+    </tr>
+    </thead>
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Sr. No.</th>
+        <th scope="col">Task title</th>
+        <th scope="col">Task Description</th>
+        <th scope="col">            </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in task_list %}
+    {% if j.t_status == i.task_status %}
+    <tr>
+        <td scope="row">{{ forloop.counter }}</td>
+        <td> {{i.task_title}}</td>
+        <td> {{i.task_desc}}</td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Action
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'todo_app:views_task' id=i.task_id uid=uid %}">Detail</a></li>
+                    <li><a class="dropdown-item" href="{% url 'todo_app:edit' id=i.task_id uid=uid %}">Edit</a></li>
+                    <li><a class="dropdown-item" href="{% url 'todo_app:del' id=i.task_id uid=uid %}">Delete</a></li>
+                </ul>
+            </div>
+        </td>
+
+
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+
+ <center><a href="{% url 'todo_app:home' uid=uid %}">
+            <button type="button" class="btn btn-secondary">Back</button>
+        </a> </center>
+</div>
+{% endblock %}
+
+

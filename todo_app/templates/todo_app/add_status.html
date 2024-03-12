@@ -1,0 +1,25 @@
+{% extends 'todo_app/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <br><h2>Add status </h2> <br>
+    <form method="POST" action="{% url 'todo_app:add_status' uid=uid%}" class="form-container">
+        {% csrf_token %}
+        <div class="form-group">
+
+            <label for="id_t_status">T status:</label>
+
+            <input type="text" class="form-control" name="t_status" required="" id="id_t_status"> <br>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <a href="{% url 'todo_app:home' uid=uid %}">
+                <button type="button" class="btn btn-secondary">Back</button>
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock%}
+
+
