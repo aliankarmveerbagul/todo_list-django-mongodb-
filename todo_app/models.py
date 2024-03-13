@@ -1,7 +1,9 @@
-from django.db import models
-from .db_connect import databse
-# Create your models here.
+from db_connect import db
 
-db_list = databse.todo_list
-db_register  = databse.todo_register
-db_status = databse.todo_status
+
+# Connect to MongoDB
+db = db
+db_list = db['todo_list']
+db_register = db['todo_register']
+db_status =  db['todo_status']
+
